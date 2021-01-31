@@ -1,4 +1,4 @@
-package com.example.plantor
+package com.mobapps.plantor
 
 import org.junit.Test
 
