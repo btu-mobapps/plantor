@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "642060030657",
+    "project_id": "plantor-99a38",
+    "storage_bucket": "plantor-99a38.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642060030657:android:a05417f6123c5aecc0ba40",
+        "android_client_info": {
+          "package_name": "com.mobapps.plantor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642060030657-b138rqq01tmcnu1vcjt7h1s98q8oo987.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2weGnZ3iyuGD1G7qVjWwIdRVoBeBNkmQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642060030657-b138rqq01tmcnu1vcjt7h1s98q8oo987.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
