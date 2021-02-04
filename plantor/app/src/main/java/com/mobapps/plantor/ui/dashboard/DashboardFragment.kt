@@ -29,9 +29,9 @@ class DashboardFragment : Fragment() {
 
         val plantList = ArrayList<Plant>()
 
-        plantList.add(Plant(imgUrl = "https://cdn.pixabay.com/photo/2016/11/14/04/45/elephant-1822636_960_720.jpg"))
-        plantList.add(Plant(imgUrl = "https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg"))
-        plantList.add(Plant(imgUrl = "https://cdn.pixabay.com/photo/2015/12/01/20/28/fall-1072821_960_720.jpg"))
+        plantList.add(Plant(imgUri = "https://cdn.pixabay.com/photo/2016/11/14/04/45/elephant-1822636_960_720.jpg"))
+        plantList.add(Plant(imgUri = "https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg"))
+        plantList.add(Plant(imgUri = "https://cdn.pixabay.com/photo/2015/12/01/20/28/fall-1072821_960_720.jpg"))
 
         val adapter = PlantAdapter(plantList, root.context)
         recyclerView.adapter = adapter

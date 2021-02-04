@@ -25,7 +25,7 @@ class PlantAdapter(private var plants:List<Plant>, private val context: Context)
         val curPhoto = plants[position]
 
         Glide.with(context)
-            .load(curPhoto.imgUrl)
+            .load(curPhoto.imgUri)
             .placeholder(R.drawable.ic_launcher_background)
             .centerCrop()
             .into(holder.imageView)

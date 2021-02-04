@@ -18,14 +18,15 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.mobapps.plantor.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_plantadd"
+        android:name="com.mobapps.plantor.ui.plantadd.PlantaddFragment"
+        android:label="@string/title_plantadd"
+        tools:layout="@layout/fragment_plantadd" />
 
     <fragment
-        android:id="@+id/navigation_settings"
+        android:id="@+id/settingsFragment"
         android:name="com.mobapps.plantor.ui.settings.SettingsFragment"
-        android:label="@string/title_settings"
+        android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+
 </navigation>

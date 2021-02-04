@@ -13,7 +13,7 @@
     <!-- titles -->
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_plantadd">Add Plant</string>
+    <string name="title_activity_login">Plantor</string>
     <string name="title_settings">Settings</string>
 </resources>
