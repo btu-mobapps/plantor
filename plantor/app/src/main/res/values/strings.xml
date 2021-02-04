@@ -16,4 +16,6 @@
     <string name="title_plantadd">Add Plant</string>
     <string name="title_activity_login">Plantor</string>
     <string name="title_settings">Settings</string>
+    <string name="default_notification_channel_id">notif_chn</string>
+    <string name="fcm_message">This is plantor!</string>
 </resources>
