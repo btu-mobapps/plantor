@@ -29,7 +29,10 @@ class LoginActivity : AppCompatActivity() {
 
         userAuth = FirebaseAuth.getInstance()
 
-
+        if (userAuth.currentUser != null){
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
 
         userName = findViewById(R.id.username)
         password = findViewById(R.id.password)
