@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mobapps.plantor.R
 import com.mobapps.plantor.data.Plant
+import java.io.File
 
 class PlantAdapter(private var plants:List<Plant>, private val context: Context): RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
 
@@ -22,10 +24,10 @@ class PlantAdapter(private var plants:List<Plant>, private val context: Context)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val curPhoto = plants[position]
+        val curPlant = plants[position]
 
         Glide.with(context)
-            .load(curPhoto.imgUri)
+            .load(curPlant.imgUri)
             .placeholder(R.drawable.ic_launcher_background)
             .centerCrop()
             .into(holder.imageView)

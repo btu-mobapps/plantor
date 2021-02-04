@@ -2,6 +2,7 @@ package com.mobapps.plantor.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.mobapps.plantor.R
 import com.mobapps.plantor.data.DateManager
+import com.mobapps.plantor.data.FirebaseDatabaseHelper
 import com.mobapps.plantor.ui.login.LoginActivity
 
 class HomeFragment : Fragment() {
@@ -38,6 +40,12 @@ class HomeFragment : Fragment() {
             startActivity(Intent(this.context, LoginActivity::class.java))
 
             activity?.finish()
+        }
+
+        root.findViewById<Button>(R.id.database_print).setOnClickListener {
+//            FirebaseDatabaseHelper.getInstance()?.printPlant()
+
+
         }
 
         return root

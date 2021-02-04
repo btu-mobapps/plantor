@@ -12,6 +12,7 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mobapps.plantor.R
+import com.mobapps.plantor.data.FirebaseDatabaseHelper
 import com.mobapps.plantor.data.Plant
 import kotlin.math.log
 
@@ -60,13 +61,19 @@ class PlantaddFragment : Fragment() {
         }
 
         addplant_btn.setOnClickListener {
-            addPlant()
+            startPlantAdd()
         }
 
         return root
     }
 
-    fun addPlant () {
+    fun startPlantAdd () {
+        FirebaseDatabaseHelper.getInstance()?.uploadImage(select_imageView) {
+            addPlant(it)
+        }
+    }
+
+    fun addPlant (imageUrl: String) {
         var newPlant = Plant()
 
         var week_bitwise = 0
@@ -77,16 +84,16 @@ class PlantaddFragment : Fragment() {
             }
         }
 
-        newPlant.imgUri = selectedImageUri.toString()
+        newPlant.imgUri = imageUrl
 
-        newPlant.waterDays = week_bitwise
+        newPlant.waterDays = week_bitwise.toString()
         newPlant.lastWaterDate = "never"
 
         newPlant.name = plantname_editText.text.toString()
         newPlant.waterHour = waterhour_editText.text.toString()
 
 //      Log.d("CUSTOM", week_bitwise.toString(2).padStart(7, '0'));
-        Log.d("CUSTOM", newPlant.toString());
+        FirebaseDatabaseHelper.getInstance()?.addPlant(newPlant)
     }
 
     private fun selectImageFromGallery() {
