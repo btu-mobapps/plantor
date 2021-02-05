@@ -21,6 +21,7 @@ class PlantAdapter(private var plants:List<Plant>, private val context: Context)
 
     lateinit var dashboardFrag: DashboardFragment
     var plant_refs: MutableMap<ImageView, Plant> = mutableMapOf()
+    var plant_uids: MutableMap<ImageView, String> = mutableMapOf()
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.image_view)
@@ -43,7 +44,16 @@ class PlantAdapter(private var plants:List<Plant>, private val context: Context)
 
         plant_refs[holder.imageView] = curPlant
 
-        holder.imageView.setColorFilter(context.getColor(R.color.plantview_not_watered_tint), PorterDuff.Mode.MULTIPLY)
+        if (DateManager.getInstance()?.compareBitwiseWithCurrent(curPlant.waterDays!!.toInt())!!) {
+            Log.d("FB_DB", "Water Today!")
+
+            holder.imageView.setColorFilter(context.getColor(R.color.plantview_not_watered_tint), PorterDuff.Mode.MULTIPLY)
+        } else {
+            Log.d("FB_DB", "No need for Water!")
+
+            holder.imageView.setColorFilter(context.getColor(R.color.plantview_no_need_tint), PorterDuff.Mode.MULTIPLY)
+        }
+
 
         FirebaseDatabaseHelper.getInstance()?.onDatabaseEmpty?.plusAssign {
             PlantDataManager.getInstance()?.resetManager()
@@ -58,9 +68,11 @@ class PlantAdapter(private var plants:List<Plant>, private val context: Context)
 
         holder.imageView.setOnClickListener{
             plant_refs[holder.imageView]?.let { ref ->
-                ref.lastWaterDate = DateManager.getInstance()?.getCurrentDate()
+                var curDate = DateManager.getInstance()?.getCurrentDate()
 
-                FirebaseDatabaseHelper.getInstance()?.updatePlant(ref) { dashboardFrag.updateRecyclerView() }
+//                Log.d("FB_DB", curDate.toString())
+
+                FirebaseDatabaseHelper.getInstance()?.updatePlant(ref, curDate.toString()) { dashboardFrag.updateRecyclerView() }
             }
 
             Log.d("MSG_LK", "Water plant")

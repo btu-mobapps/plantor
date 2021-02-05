@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.mobapps.plantor.R
+import com.mobapps.plantor.data.DateManager
 import com.mobapps.plantor.data.ScheduledWorker
 import com.mobapps.plantor.services.ScheduledNotificationManager
 import com.mobapps.plantor.ui.login.LoginActivity
@@ -50,7 +52,9 @@ class HomeFragment : Fragment() {
 
         //TODO: test notif
         root.findViewById<Button>(R.id.database_print).setOnClickListener {
-            ScheduledNotificationManager.getInstance()?.scheduleNotification(root.context, "2021-02-05 17:49:00", "Scheduled Notif", "wow you got it")
+//            ScheduledNotificationManager.getInstance()?.scheduleNotification(root.context, "2021-02-05 17:49:00", "Scheduled Notif", "wow you got it")
+
+            Log.d("FB_DB", DateManager.getInstance()!!.getCurrentBitwiseWeekday().toString())
         }
 
         return root

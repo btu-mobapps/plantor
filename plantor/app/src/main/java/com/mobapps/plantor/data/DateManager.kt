@@ -22,6 +22,7 @@ public class DateManager {
     }
 
     val dFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    val weekdayFormat: DateFormat = SimpleDateFormat("u")
 
     fun compareToday (context: Context, date: String) {
         val today: String = getCurrentDate()
@@ -43,6 +44,14 @@ public class DateManager {
             e.printStackTrace()
         }
         return false
+    }
+
+    fun getCurrentBitwiseWeekday (): Int {
+        return 1 shl (weekdayFormat.format(Calendar.getInstance().time).toInt() - 1)
+    }
+
+    fun compareBitwiseWithCurrent (waterWeekdays: Int): Boolean {
+        return getCurrentBitwiseWeekday() and waterWeekdays != 0
     }
 
 }

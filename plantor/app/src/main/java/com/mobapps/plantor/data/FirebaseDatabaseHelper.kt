@@ -51,6 +51,8 @@ public class FirebaseDatabaseHelper  {
     public fun deletePlantFromDatabase (plant: Plant, onSuccess: () -> Unit) {
         var key_ref = plant_refs[plant]
 
+        Log.d("FB_DB", key_ref.toString())
+
         if (key_ref != null) {
             mReferencePlants.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child(key_ref).setValue(null).addOnSuccessListener {
                 PlantDataManager.getInstance()!!.fetchDatabaseForPlants { onSuccess() }
@@ -58,11 +60,19 @@ public class FirebaseDatabaseHelper  {
         }
     }
 
-    public fun updatePlant (plant: Plant, onSuccess: () -> Unit) {
-        var key_ref = plant_refs[plant]
+    public fun updatePlant (plant: Plant, newDate: String, onSuccess: () -> Unit) {
+        var key_ref = plant_refs[plant]!!
 
-        if (key_ref != null) {
-            mReferencePlants.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child(key_ref).setValue(plant).addOnSuccessListener {
+        val childUpdates = hashMapOf<String, Any>()
+
+        childUpdates["imgUri"] = plant.imgUri!!
+        childUpdates["lastWaterDate"] = newDate
+        childUpdates["name"] = plant.name!!
+        childUpdates["waterDays"] = plant.waterDays!!
+        childUpdates["waterHour"] = plant.waterHour!!
+
+        if (plant != null) {
+            mReferencePlants.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child(key_ref).updateChildren(childUpdates).addOnSuccessListener {
                 PlantDataManager.getInstance()!!.fetchDatabaseForPlants { onSuccess() }
             }
         }
@@ -106,7 +116,7 @@ public class FirebaseDatabaseHelper  {
                 Log.d("CUSTOM", "Database is empty!")
             } else {
                 var plants = mutableListOf<Plant>()
-                var plantlist_map = user_plants as HashMap<String, Any>
+                var plantlist_map = user_plants as HashMap<Any, Any>
 
                 for ((key, value) in plantlist_map) {
                     var plant_map = value as HashMap<String, Any>
@@ -120,7 +130,9 @@ public class FirebaseDatabaseHelper  {
                     newPlant.waterDays = plant_map["waterDays"] as String
 
                     plants.add(newPlant)
-                    plant_refs[newPlant] = key
+                    plant_refs[newPlant] = key.toString()
+
+                    Log.d("FB_DB", plant_refs[newPlant].toString())
                 }
 
                 onSuccess(plants)
