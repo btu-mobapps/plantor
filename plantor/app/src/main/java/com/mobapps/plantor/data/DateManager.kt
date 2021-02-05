@@ -21,19 +21,22 @@ public class DateManager {
         }
     }
 
-    public fun compareDates (context: Context) {
-        val df: DateFormat = SimpleDateFormat("dd/M/yyyy h:mm")
-        val date: String = df.format(Calendar.getInstance().time)
+    val dFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
-        Toast.makeText(context, checktimings("01/2/2021 3:42", date).toString(), Toast.LENGTH_LONG).show()
+    fun compareToday (context: Context, date: String) {
+        val today: String = getCurrentDate()
+
+        Toast.makeText(context, checkBefore(date, today).toString(), Toast.LENGTH_LONG).show()
     }
 
-    private fun checktimings(time: String, endtime: String): Boolean {
-        val pattern = "dd/M/yyyy h:mm"
-        val sdf = SimpleDateFormat(pattern)
+    fun getCurrentDate (): String {
+        return dFormat.format(Calendar.getInstance().time)
+    }
+
+    fun checkBefore(beforeTime: String, afterTime: String): Boolean {
         try {
-            val date1 = sdf.parse(time)
-            val date2 = sdf.parse(endtime)
+            val date1 = dFormat.parse(beforeTime)
+            val date2 = dFormat.parse(afterTime)
 
             return date1.before(date2)
         } catch (e: ParseException) {

@@ -63,6 +63,8 @@ class PlantaddFragment : Fragment() {
 
         addplant_btn.setOnClickListener {
             startPlantAdd()
+
+            activity?.supportFragmentManager?.popBackStack();
         }
 
         return root

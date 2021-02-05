@@ -1,5 +1,7 @@
 package com.mobapps.plantor.data
 
+import android.util.Log
+
 class PlantDataManager {
 
     private var plantList: ArrayList<Plant> = arrayListOf()
@@ -29,6 +31,8 @@ class PlantDataManager {
     }
 
     fun fetchDatabaseForPlants (onComplete: () -> Unit) {
+        Log.d("FETCH_DB", "Fetching database")
+
         FirebaseDatabaseHelper.getInstance()?.getPlantList {
             plants ->
             run {
@@ -52,6 +56,11 @@ class PlantDataManager {
 
         return plantList
     }
+
+    fun getPlantsNoFetch (): List<Plant> {
+        return plantList
+    }
+
 
 
 }

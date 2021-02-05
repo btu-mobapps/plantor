@@ -29,6 +29,8 @@ public class FirebaseDatabaseHelper  {
         }
     }
 
+    public var onDatabaseEmpty: Event = Event()
+
     private var mDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
     private var mReferencePlants: DatabaseReference
     private var mStorage: FirebaseStorage
@@ -51,6 +53,16 @@ public class FirebaseDatabaseHelper  {
 
         if (key_ref != null) {
             mReferencePlants.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child(key_ref).setValue(null).addOnSuccessListener {
+                PlantDataManager.getInstance()!!.fetchDatabaseForPlants { onSuccess() }
+            }
+        }
+    }
+
+    public fun updatePlant (plant: Plant, onSuccess: () -> Unit) {
+        var key_ref = plant_refs[plant]
+
+        if (key_ref != null) {
+            mReferencePlants.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child(key_ref).setValue(plant).addOnSuccessListener {
                 PlantDataManager.getInstance()!!.fetchDatabaseForPlants { onSuccess() }
             }
         }
@@ -87,6 +99,10 @@ public class FirebaseDatabaseHelper  {
             var user_plants = it.value
 
             if (user_plants == null) {
+                if (onDatabaseEmpty.observers.count() > 0) {
+                    onDatabaseEmpty.invoke()
+                }
+
                 Log.d("CUSTOM", "Database is empty!")
             } else {
                 var plants = mutableListOf<Plant>()

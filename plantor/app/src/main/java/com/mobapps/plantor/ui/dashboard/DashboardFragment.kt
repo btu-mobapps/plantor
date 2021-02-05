@@ -51,4 +51,14 @@ class DashboardFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(cxt, 2)
     }
+
+    fun updateRecyclerViewNoFetch () {
+        var plants = PlantDataManager.getInstance()!!.getPlantsNoFetch()
+        val adapter = PlantAdapter(plants, cxt)
+
+        adapter.dashboardFrag = this
+
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = GridLayoutManager(cxt, 2)
+    }
 }
