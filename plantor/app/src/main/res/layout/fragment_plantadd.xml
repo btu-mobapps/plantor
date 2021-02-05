@@ -5,15 +5,16 @@
     android:id="@+id/gallery_image"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.plantadd.PlantaddFragment">
+    tools:context=".ui.plantadd.PlantaddFragment"
+    android:background="@color/background">
 
 
     <ImageView
         android:id="@+id/select_plant_image_view"
         android:layout_width="180dp"
         android:layout_height="180dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/common_google_signin_btn_icon_dark_normal"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/selectimage_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,6 +23,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Select Days"
-                    android:textColor="@color/black"
+                    android:textColor="@color/addplant_text"
                     android:textSize="18dp" />
             </TableRow>
 
@@ -55,7 +57,8 @@
                     android:id="@+id/day_monday_cb"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
-                    android:text="Monday"/>
+                    android:text="Monday"
+                    android:textColor="@color/addplant_text" />
             </TableRow>
 
             <TableRow
@@ -66,7 +69,9 @@
                     android:id="@+id/day_tuesday_cb"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
-                    android:text="Tuesday" />
+                    android:text="Tuesday"
+                    android:textColor="@color/addplant_text"
+                    android:textColorHint="#000000" />
             </TableRow>
 
             <TableRow
@@ -77,7 +82,8 @@
                     android:id="@+id/day_wednesday_cb"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
-                    android:text="Wednesday" />
+                    android:text="Wednesday"
+                    android:textColor="@color/addplant_text" />
             </TableRow>
 
             <TableRow
@@ -88,7 +94,8 @@
                     android:id="@+id/day_thursday_cb"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
-                    android:text="Thursday" />
+                    android:text="Thursday"
+                    android:textColor="@color/addplant_text" />
             </TableRow>
 
             <TableRow
@@ -99,7 +106,8 @@
                     android:id="@+id/day_friday_cb"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
-                    android:text="Friday" />
+                    android:text="Friday"
+                    android:textColor="@color/addplant_text" />
             </TableRow>
 
             <TableRow
@@ -110,7 +118,8 @@
                     android:id="@+id/day_saturday_cb"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
-                    android:text="Saturday" />
+                    android:text="Saturday"
+                    android:textColor="@color/addplant_text" />
             </TableRow>
 
             <TableRow
@@ -121,7 +130,8 @@
                     android:id="@+id/day_sunday_cb"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
-                    android:text="Sunday" />
+                    android:text="Sunday"
+                    android:textColor="@color/addplant_text" />
             </TableRow>
 
         </TableLayout>
@@ -136,16 +146,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="Type Name"
                 android:inputType="textPersonName"
-                android:hint="Type Name" />
+                android:textColor="@color/addplant_text"
+                android:backgroundTint="@color/addplant_text"
+                android:textColorHint="@color/login_hint" />
 
             <EditText
                 android:id="@+id/plant_water_hour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="Type Hour"
                 android:inputType="time"
-                android:hint="Select Hour" />
+                android:textColor="@color/addplant_text"
+                android:backgroundTint="@color/addplant_text"
+                android:textColorHint="@color/login_hint" />
 
         </LinearLayout>
 
@@ -156,7 +172,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:backgroundTint="@color/orange"
+        android:textColor="@color/button_important_text"
         android:layout_weight="1"
+        android:textSize="18dp"
+        android:textStyle="bold"
         android:text="Add Plant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

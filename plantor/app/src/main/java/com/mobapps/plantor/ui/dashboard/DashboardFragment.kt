@@ -29,7 +29,6 @@ class DashboardFragment : Fragment() {
 
         recyclerView = root.findViewById(R.id.recycler_view)
 
-
         FirebaseDatabaseHelper.getInstance()?.getPlantList {
                 plants ->
             run {
