@@ -1,6 +1,6 @@
 # Plantor - მოუარე მცენარეებს მშვიდად
 
-## Key technologies and libraries/Components
+## Key Components
 
 <b>Firebase services:</b> <i> Authentication, Realtime Database, Storage, Cloud Messaging (partially removed) </i>
 <br>
