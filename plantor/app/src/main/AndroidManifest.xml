@@ -27,13 +27,7 @@
             android:name=".MainActivity"
             android:label="@string/app_name" />
 
-        <service
-            android:name=".services.FirebaseCloudMessaging"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
+        <receiver android:name=".util.NotificationBroadcastReceiver" />
     </application>
 
 </manifest>
