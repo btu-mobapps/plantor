@@ -12,6 +12,8 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
+import java.util.*
+import kotlin.collections.HashMap
 
 public class FirebaseDatabaseHelper  {
 
@@ -31,6 +33,7 @@ public class FirebaseDatabaseHelper  {
     private var mReferencePlants: DatabaseReference
     private var mStorage: FirebaseStorage
     private var plants: List<Plant> = listOf()
+    private var plant_refs: MutableMap<Plant, String> = mutableMapOf()
 
     constructor() {
         mReferencePlants = mDatabase.getReference("plants")
@@ -43,21 +46,13 @@ public class FirebaseDatabaseHelper  {
         }
     }
 
-    public fun printPlant () {
-        var snapshot = mReferencePlants.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).get()
+    public fun deletePlantFromDatabase (plant: Plant, onSuccess: () -> Unit) {
+        var key_ref = plant_refs[plant]
 
-        snapshot.addOnSuccessListener {
-            var plant = it.value
-
-            if (plant == null) {
-                Log.d("CUSTOM", "Database is empty!")
-            } else {
-                Log.d("CUSTOM", plant.toString())
+        if (key_ref != null) {
+            mReferencePlants.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child(key_ref).setValue(null).addOnSuccessListener {
+                PlantDataManager.getInstance()!!.fetchDatabaseForPlants { onSuccess() }
             }
-        }
-
-        snapshot.addOnFailureListener {
-            Log.d("CUSTOM", "Failed to get response from database!")
         }
     }
 
@@ -109,6 +104,7 @@ public class FirebaseDatabaseHelper  {
                     newPlant.waterDays = plant_map["waterDays"] as String
 
                     plants.add(newPlant)
+                    plant_refs[newPlant] = key
                 }
 
                 onSuccess(plants)

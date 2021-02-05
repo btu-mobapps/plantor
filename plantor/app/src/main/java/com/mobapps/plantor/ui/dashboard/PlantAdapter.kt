@@ -9,13 +9,18 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mobapps.plantor.R
+import com.mobapps.plantor.data.FirebaseDatabaseHelper
 import com.mobapps.plantor.data.Plant
 
 class PlantAdapter(private var plants:List<Plant>, private val context: Context): RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
 
+    lateinit var dashboardFrag: DashboardFragment
+
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.image_view)
         val cancelImg: ImageView = itemView.findViewById(R.id.cancel_img)
+
+        var plant_refs: MutableMap<ImageView, Plant> = mutableMapOf()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,7 +29,13 @@ class PlantAdapter(private var plants:List<Plant>, private val context: Context)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (position == 0) {
+            holder.plant_refs.clear()
+        }
+
         val curPlant = plants[position]
+
+        holder.plant_refs[holder.imageView] = curPlant
 
         Glide.with(context)
             .load(curPlant.imgUri)
@@ -37,6 +48,10 @@ class PlantAdapter(private var plants:List<Plant>, private val context: Context)
         }
 
         holder.cancelImg.setOnClickListener{
+            holder.plant_refs[holder.imageView]?.let { plant ->
+                FirebaseDatabaseHelper.getInstance()?.deletePlantFromDatabase(plant) { dashboardFrag.updateRecyclerView() }
+            }
+
             Log.d("MSG_LK", "Remove Plant")
         }
     }

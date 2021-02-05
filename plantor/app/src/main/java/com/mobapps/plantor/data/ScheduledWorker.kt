@@ -11,7 +11,6 @@ class ScheduledWorker(appContext: Context, workerParams: WorkerParameters) :
         Worker(appContext, workerParams) {
 
     override fun doWork(): Result {
-
         Log.d(TAG, "Work START")
 
         // Get Notification Data
