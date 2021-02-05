@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.mobapps.plantor.R
 import com.mobapps.plantor.data.FirebaseDatabaseHelper
 import com.mobapps.plantor.data.Plant
+import com.mobapps.plantor.data.PlantDataManager
 import kotlin.math.log
 
 class PlantaddFragment : Fragment() {
@@ -93,7 +94,7 @@ class PlantaddFragment : Fragment() {
         newPlant.waterHour = waterhour_editText.text.toString()
 
 //      Log.d("CUSTOM", week_bitwise.toString(2).padStart(7, '0'));
-        FirebaseDatabaseHelper.getInstance()?.addPlant(newPlant)
+        FirebaseDatabaseHelper.getInstance()?.addPlant(newPlant) { PlantDataManager.getInstance()!!.fetchDatabaseForPlants {  } }
     }
 
     private fun selectImageFromGallery() {

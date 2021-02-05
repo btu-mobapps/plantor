@@ -63,7 +63,9 @@ class LoginActivity : AppCompatActivity() {
                             startActivity(Intent(this,RegisterActivity::class.java))
                         }
                     }
-                }  } }
+                }
+            }
+        }
 
         recoverButton.setOnClickListener{
             startActivity(Intent(this,LostActivity::class.java))

@@ -37,8 +37,10 @@ public class FirebaseDatabaseHelper  {
         mStorage = Firebase.storage
     }
 
-    public fun addPlant (plantToAdd: Plant) {
-        mReferencePlants.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child(plantToAdd.hashCode().toString()).setValue(plantToAdd)
+    public fun addPlant (plantToAdd: Plant, onSuccess: () -> Unit) {
+        mReferencePlants.child(FirebaseAuth.getInstance().currentUser?.uid.toString()).child(plantToAdd.hashCode().toString()).setValue(plantToAdd).addOnSuccessListener {
+            onSuccess()
+        }
     }
 
     public fun printPlant () {
