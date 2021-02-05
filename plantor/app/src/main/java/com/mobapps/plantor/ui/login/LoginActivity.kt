@@ -9,6 +9,8 @@ import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.mobapps.plantor.MainActivity
 
 
@@ -55,15 +57,16 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(Intent(this,MainActivity::class.java))
                         finish()
                     } else{
-                        startActivity(Intent(this,RegisterActivity::class.java))
+                        if (it.exception is FirebaseAuthInvalidCredentialsException) {
+                            Toast.makeText(this, "Incorrect credentials!", Toast.LENGTH_SHORT).show()
+                        } else {
+                            startActivity(Intent(this,RegisterActivity::class.java))
+                        }
                     }
                 }  } }
 
         recoverButton.setOnClickListener{
             startActivity(Intent(this,LostActivity::class.java))
         }
-
-
-
     }
 }
