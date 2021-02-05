@@ -1,5 +1,11 @@
 # Plantor - მოუარე მცენარეებს მშვიდად
 
+## Key technologies and libraries/Components
+
+<b>Firebase services:</b> <i> Authentication, Realtime Database, Storage, Cloud Messaging (partially removed) </i>
+<br>
+<b>Libraries & Components:</b> <i> Notifications, Workers, Naviagtion Component, Recycler View, Date & Time, BroadcastReceiver </i>
+
 ### About this app
 
 Plantor წარმოადგენს უფასო პროგრამას 
