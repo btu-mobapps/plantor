@@ -15,6 +15,7 @@ import com.mobapps.plantor.MainActivity
 
 
 import com.mobapps.plantor.R
+import com.mobapps.plantor.data.PlantDataManager
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var userName: EditText
@@ -70,5 +71,7 @@ class LoginActivity : AppCompatActivity() {
         recoverButton.setOnClickListener{
             startActivity(Intent(this,LostActivity::class.java))
         }
+
+        PlantDataManager.getInstance()?.resetManager()
     }
 }

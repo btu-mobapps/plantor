@@ -22,6 +22,12 @@ class PlantDataManager {
 
     }
 
+    fun resetManager () {
+        firstFetchDone = false
+
+        plantList.clear()
+    }
+
     fun fetchDatabaseForPlants (onComplete: () -> Unit) {
         FirebaseDatabaseHelper.getInstance()?.getPlantList {
             plants ->

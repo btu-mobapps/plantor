@@ -21,4 +21,9 @@
 
     <color name="button_important_text">#FFFFFF</color>
     <color name="button_important_background">#03CDBA</color>
+
+    <color name="plantview_watered_tint">#5FC6EF</color>
+    <color name="plantview_no_need_tint">#878787</color>
+    <color name="plantview_not_watered_tint">#DF805A</color>
+    <color name="plantview_cancel_red">#ED3203</color>
 </resources>
