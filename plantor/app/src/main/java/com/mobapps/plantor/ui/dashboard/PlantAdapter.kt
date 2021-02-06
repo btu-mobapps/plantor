@@ -47,7 +47,7 @@ class PlantAdapter(private var plants:List<Plant>, private val context: Context)
         if (DateManager.getInstance()?.compareBitwiseWithCurrent(curPlant.waterDays!!.toInt())!!) {
             Log.d("FB_DB", "Water Today!")
 
-            if (DateManager.getInstance()!!.wasLastWaterToday(curPlant.lastWaterDate!!)) {
+            if (curPlant.lastWaterDate == "never" || DateManager.getInstance()!!.wasLastWaterToday(curPlant.lastWaterDate!!)) {
                 holder.imageView.setColorFilter(context.getColor(R.color.plantview_not_watered_tint), PorterDuff.Mode.MULTIPLY)
 
                 holder.imageView.setOnClickListener{
