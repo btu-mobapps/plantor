@@ -17,6 +17,7 @@ import com.mobapps.plantor.R
 import com.mobapps.plantor.data.DateManager
 import com.mobapps.plantor.data.ScheduledWorker
 import com.mobapps.plantor.services.ScheduledNotificationManager
+import com.mobapps.plantor.ui.login.ChangePasswordActivity
 import com.mobapps.plantor.ui.login.LoginActivity
 import com.mobapps.plantor.util.NotificationBroadcastReceiver
 import com.mobapps.plantor.util.NotificationUtil
@@ -54,7 +55,7 @@ class HomeFragment : Fragment() {
         root.findViewById<Button>(R.id.database_print).setOnClickListener {
 //            ScheduledNotificationManager.getInstance()?.scheduleNotification(root.context, "2021-02-05 17:49:00", "Scheduled Notif", "wow you got it")
 
-            Log.d("FB_DB", DateManager.getInstance()!!.getCurrentBitwiseWeekday().toString())
+            startActivity(Intent(this.context, ChangePasswordActivity::class.java))
         }
 
         return root
