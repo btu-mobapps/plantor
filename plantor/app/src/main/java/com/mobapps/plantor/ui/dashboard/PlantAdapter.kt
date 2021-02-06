@@ -47,7 +47,23 @@ class PlantAdapter(private var plants:List<Plant>, private val context: Context)
         if (DateManager.getInstance()?.compareBitwiseWithCurrent(curPlant.waterDays!!.toInt())!!) {
             Log.d("FB_DB", "Water Today!")
 
-            holder.imageView.setColorFilter(context.getColor(R.color.plantview_not_watered_tint), PorterDuff.Mode.MULTIPLY)
+            if (DateManager.getInstance()!!.wasLastWaterToday(curPlant.lastWaterDate!!)) {
+                holder.imageView.setColorFilter(context.getColor(R.color.plantview_not_watered_tint), PorterDuff.Mode.MULTIPLY)
+
+                holder.imageView.setOnClickListener{
+                    plant_refs[holder.imageView]?.let { ref ->
+                        var curDate = DateManager.getInstance()?.getCurrentDate()
+
+//                Log.d("FB_DB", curDate.toString())
+
+                        FirebaseDatabaseHelper.getInstance()?.updatePlant(ref, curDate.toString()) { dashboardFrag.updateRecyclerView() }
+                    }
+
+                    Log.d("FB_DB", "Plant Watered")
+                }
+            } else {
+                holder.imageView.setColorFilter(context.getColor(R.color.plantview_watered_tint), PorterDuff.Mode.MULTIPLY)
+            }
         } else {
             Log.d("FB_DB", "No need for Water!")
 
@@ -65,18 +81,6 @@ class PlantAdapter(private var plants:List<Plant>, private val context: Context)
             .placeholder(R.drawable.ic_launcher_background)
             .centerCrop()
             .into(holder.imageView)
-
-        holder.imageView.setOnClickListener{
-            plant_refs[holder.imageView]?.let { ref ->
-                var curDate = DateManager.getInstance()?.getCurrentDate()
-
-//                Log.d("FB_DB", curDate.toString())
-
-                FirebaseDatabaseHelper.getInstance()?.updatePlant(ref, curDate.toString()) { dashboardFrag.updateRecyclerView() }
-            }
-
-            Log.d("MSG_LK", "Water plant")
-        }
 
         holder.cancelImg.setOnClickListener{
             plant_refs[holder.imageView]?.let { ref ->

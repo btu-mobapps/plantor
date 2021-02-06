@@ -1,6 +1,7 @@
 package com.mobapps.plantor.data
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import java.text.DateFormat
 import java.text.ParseException
@@ -22,6 +23,7 @@ public class DateManager {
     }
 
     val dFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    val nohourFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
     val weekdayFormat: DateFormat = SimpleDateFormat("u")
 
     fun compareToday (context: Context, date: String) {
@@ -32,6 +34,10 @@ public class DateManager {
 
     fun getCurrentDate (): String {
         return dFormat.format(Calendar.getInstance().time)
+    }
+
+    fun getCurrentDateWithStartSecond (): String {
+        return nohourFormat.format(Calendar.getInstance().time).toString() + " 00:00:00"
     }
 
     fun checkBefore(beforeTime: String, afterTime: String): Boolean {
@@ -52,6 +58,12 @@ public class DateManager {
 
     fun compareBitwiseWithCurrent (waterWeekdays: Int): Boolean {
         return getCurrentBitwiseWeekday() and waterWeekdays != 0
+    }
+
+    fun wasLastWaterToday (lastWater: String): Boolean {
+        val result = checkBefore(lastWater, getCurrentDateWithStartSecond())
+
+        return result
     }
 
 }
